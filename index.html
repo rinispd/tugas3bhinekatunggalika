@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Interaktif - Bhinneka Tunggal Ika</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+            overflow-x: hidden;
+        }
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for content areas */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        /* Aspect Ratio 16:9 Wrapper */
+        .ratio-16-9 {
+            aspect-ratio: 16 / 9;
+            max-height: 90vh;
+        }
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .active-tab {
+            background: linear-gradient(135deg, #b91c1c, #991b1b);
+            box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4);
+            border-color: #f87171;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col justify-center items-center p-4 md:p-6 select-none">
+
+    <!-- Main 16:9 Container Wrapper -->
+    <div class="w-full max-w-7xl ratio-16-9 glass-panel rounded-3xl shadow-2xl flex flex-col overflow-hidden relative border border-slate-700/50">
+        
+        <!-- Header Bar -->
+        <header class="h-16 border-b border-slate-700/50 px-6 flex items-center justify-between bg-slate-900/80 shrink-0 z-10">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-red-600 to-amber-500 p-2 rounded-xl text-white shadow-md">
+                    <i class="fa-solid fa-layer-group text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-sm md:text-base font-extrabold tracking-wide uppercase bg-gradient-to-r from-red-400 via-amber-200 to-white bg-clip-text text-transparent">
+                        Bhinneka Tunggal Ika
+                    </h1>
+                    <p class="text-[10px] md:text-xs text-slate-400 font-semibold">Fase F / Kelas XI SMA - Pendidikan Pancasila</p>
+                </div>
+            </div>
+            
+            <!-- Designer / Compiler Badge (Sultan Hamid II) -->
+            <div class="flex items-center space-x-3 bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-700">
+                <div class="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-900 font-bold text-xs shadow-inner">
+                    SH
+                </div>
+                <div class="text-left">
+                    <p class="text-[9px] text-slate-400 leading-none">Penyusun</p>
+                    <p class="text-xs font-bold text-amber-400">Sultan Hamid II dari Pontianak</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace split into 50% Left and 50% Right -->
+        <div class="flex flex-1 overflow-hidden relative">
+
+            <!-- LEFT HALF: Content, Objectives, & Quiz Evaluasi (50%) -->
+            <div class="w-1/2 border-r border-slate-700/50 flex flex-col bg-slate-900/20 relative z-10">
+                
+                <!-- Navigation Tabs Inside Left Panel -->
+                <div class="flex border-b border-slate-700/40 bg-slate-950/40 p-2 gap-2 shrink-0">
+                    <button onclick="switchTab('tujuan')" id="tab-tujuan" class="active-tab flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border border-transparent transition-all duration-300">
+                        <i class="fa-solid fa-bullseye text-sm"></i>
+                        <span>Tujuan</span>
+                    </button>
+                    <button onclick="switchTab('materi')" id="tab-materi" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 text-slate-400 border border-transparent hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-300">
+                        <i class="fa-solid fa-book-open text-sm"></i>
+                        <span>Materi</span>
+                    </button>
+                    <button onclick="switchTab('evaluasi')" id="tab-evaluasi" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 text-slate-400 border border-transparent hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-300">
+                        <i class="fa-solid fa-graduation-cap text-sm"></i>
+                        <span>Evaluasi</span>
+                    </button>
+                </div>
+
+                <!-- LEFT PANEL CONTENT CHANGER -->
+                <div class="flex-1 overflow-y-auto p-6 custom-scroll">
+                    
+                    <!-- TAB 1: TUJUAN PEMBELAJARAN & INFO TOKOH -->
+                    <div id="content-tujuan" class="space-y-4 animate-fade-in">
+                        <div class="bg-gradient-to-r from-slate-800/80 to-slate-900/80 p-5 rounded-2xl border border-slate-700/40 shadow-sm relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
+                            <h3 class="text-base font-extrabold text-red-400 mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-star-of-life"></i> Tujuan Pembelajaran (TP)
+                            </h3>
+                            <ul class="space-y-3 text-xs md:text-sm text-slate-300 font-medium">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="mt-1 bg-red-600/30 text-red-400 p-1 rounded-md text-[10px] leading-none font-bold">1</span>
+                                    <span>Menganalisis urgensi menjaga keragaman budaya, suku, dan agama di Indonesia berdasarkan nilai luhur **Bhinneka Tunggal Ika**.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="mt-1 bg-red-600/30 text-red-400 p-1 rounded-md text-[10px] leading-none font-bold">2</span>
+                                    <span>Mengidentifikasi tantangan harmonisasi dalam kehidupan berbangsa serta memberikan alternatif solusi pemecahan konflik sosial.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="mt-1 bg-red-600/30 text-red-400 p-1 rounded-md text-[10px] leading-none font-bold">3</span>
+                                    <span>Merancang aksi kolaboratif pelestarian budaya lokal guna memperkokoh identitas nasional kebhinekaan secara aktif.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Special Sultan Hamid II Tribute Panel (Adds contextual elegance) -->
+                        <div class="bg-gradient-to-r from-amber-950/30 to-slate-900/80 p-5 rounded-2xl border border-amber-500/20 shadow-sm relative overflow-hidden">
+                            <div class="absolute -bottom-5 -right-5 w-24 h-24 bg-amber-500/10 rounded-full blur-xl"></div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-feather-pointed"></i> Mengenal Perancang Lambang Negara
+                            </h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+                                Media pembelajaran ini disusun dengan dedikasi mengenang jasa perjuangan **Sultan Hamid II dari Pontianak** (Syarif Abdul Hamid Alkadrie), perancang lambang negara Indonesia **Garuda Pancasila** yang mencengkeram erat semboyan **Bhinneka Tunggal Ika**.
+                            </p>
+                            <div class="flex gap-2 items-center bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20">
+                                <i class="fa-solid fa-quote-left text-amber-500 text-sm"></i>
+                                <span class="text-[11px] text-amber-200/90 italic font-medium leading-normal">
+                                    "Bhinneka Tunggal Ika dirajut dalam cengkeraman kaki Sang Garuda sebagai simbol keutuhan bangsa yang tak goyah oleh perbedaan."
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: URAIAN MATERI -->
+                    <div id="content-materi" class="hidden space-y-4 animate-fade-in">
+                        <!-- Sub-materi 1 -->
+                        <div class="space-y-3">
+                            <h3 class="text-sm font-extrabold text-red-400 uppercase tracking-wide border-l-4 border-red-600 pl-2">
+                                1. Hakikat Kebhinnekaan Bangsa
+                            </h3>
+                            <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                                Semboyan **Bhinneka Tunggal Ika** pertama kali ditulis oleh **Mpu Tantular** dalam Kitab **Kakawin Sutasoma** pada masa Kerajaan Majapahit (Abad ke-14). Secara etimologis berarti *berbeda-beda tetapi tetap satu jua*. Konsep ini menjadi fondasi utama integrasi sosial bangsa Indonesia yang multikultural.
+                            </p>
+                        </div>
+
+                        <!-- Sub-materi 2 -->
+                        <div class="space-y-3 pt-2">
+                            <h3 class="text-sm font-extrabold text-amber-400 uppercase tracking-wide border-l-4 border-amber-500 pl-2">
+                                2. Urgensi Harmonisasi Sosial di Era Modern
+                            </h3>
+                            <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                                Keberagaman Indonesia mencakup lebih dari **1.340 suku bangsa** dan **6 agama resmi**. Di era globalisasi, tantangan kebhinekaan bergeser menjadi maraknya hoaks bermuatan SARA, stereotip sosial, dan polarisasi opini publik. Memahami nilai toleransi aktif sangat penting untuk menjaga keutuhan NKRI.
+                            </p>
+                            <div class="grid grid-cols-2 gap-3 pt-1">
+                                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                                    <h4 class="text-xs font-bold text-slate-200 mb-1 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-triangle-exclamation text-red-400"></i> Ancaman Intern
+                                    </h4>
+                                    <p class="text-[11px] text-slate-400">Intoleransi, primordialisme sempit, dan etnosentrisme.</p>
+                                </div>
+                                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                                    <h4 class="text-xs font-bold text-slate-200 mb-1 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-shield-halved text-emerald-400"></i> Strategi Mitigasi
+                                    </h4>
+                                    <p class="text-[11px] text-slate-400">Penguatan literasi digital, moderasi beragama, dan asimilasi budaya.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub-materi 3 -->
+                        <div class="space-y-3 pt-2">
+                            <h3 class="text-sm font-extrabold text-emerald-400 uppercase tracking-wide border-l-4 border-emerald-500 pl-2">
+                                3. Peran Strategis Lambang Negara
+                            </h3>
+                            <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                                Lambang Garuda Pancasila menyatukan sila-sila Pancasila dengan pita Bhinneka Tunggal Ika. Karya monumental Sultan Hamid II ini menekankan bahwa keragaman nusantara adalah kekuatan terintegrasi, bukan potensi perpecahan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: EVALUASI (10 SOAL PG) -->
+                    <div id="content-evaluasi" class="hidden flex flex-col h-full animate-fade-in">
+                        
+                        <!-- Quiz Progress Tracker -->
+                        <div class="flex items-center justify-between mb-4 bg-slate-950/40 px-4 py-2 rounded-xl border border-slate-800 shrink-0">
+                            <span class="text-xs font-bold text-slate-400">Pertanyaan: <span id="current-q-index" class="text-amber-400 text-sm">1</span>/10</span>
+                            <div class="w-1/2 bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div id="quiz-progress-bar" class="bg-gradient-to-r from-red-600 to-amber-500 h-full w-10 transition-all duration-300"></div>
+                            </div>
+                            <span class="text-xs font-bold text-slate-400">Skor: <span id="live-score" class="text-emerald-400 text-sm">0</span></span>
+                        </div>
+
+                        <!-- Interactive Question Container -->
+                        <div id="quiz-question-container" class="space-y-4 flex-1">
+                            <!-- Question Text -->
+                            <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/50">
+                                <p id="question-text" class="text-xs md:text-sm font-bold leading-relaxed text-slate-100">
+                                    Loading Pertanyaan...
+                                </p>
+                            </div>
+
+                            <!-- 5 Options Container -->
+                            <div class="space-y-2" id="options-container">
+                                <!-- Option templates loaded via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Quiz Navigation / Footer inside left panel -->
+                        <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center shrink-0">
+                            <button id="prev-question-btn" onclick="prevQuestion()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 text-xs font-bold transition-all flex items-center gap-1.5 opacity-50 cursor-not-allowed" disabled>
+                                <i class="fa-solid fa-arrow-left"></i> Kembali
+                            </button>
+                            <button id="next-question-btn" onclick="nextQuestion()" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-red-600 to-amber-600 text-white text-xs font-bold transition-all flex items-center gap-1.5 hover:shadow-lg hover:shadow-red-900/40">
+                                Lanjut <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Result Modal Layer (shown at the end) -->
+                        <div id="quiz-result-view" class="hidden space-y-4 text-center py-6 animate-scale-up">
+                            <div class="w-20 h-20 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto border border-amber-500/30 text-3xl">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-extrabold text-slate-100">Evaluasi Selesai!</h3>
+                                <p class="text-xs text-slate-400 mt-1">Mari kita lihat hasil pemahaman Anda terkait Bhinneka Tunggal Ika.</p>
+                            </div>
+
+                            <!-- Scoreboard -->
+                            <div class="bg-slate-950/50 max-w-xs mx-auto p-4 rounded-2xl border border-slate-800 flex justify-around items-center">
+                                <div>
+                                    <p class="text-[10px] text-slate-500 font-bold uppercase">Nilai Akhir</p>
+                                    <p id="final-score" class="text-3xl font-extrabold text-emerald-400">0</p>
+                                </div>
+                                <div class="w-[1px] h-10 bg-slate-800"></div>
+                                <div>
+                                    <p class="text-[10px] text-slate-500 font-bold uppercase">Jawaban Benar</p>
+                                    <p id="final-correct" class="text-xl font-bold text-slate-200">0 / 10</p>
+                                </div>
+                            </div>
+
+                            <button onclick="restartQuiz()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white text-xs font-extrabold shadow-lg transition-all mx-auto inline-flex items-center gap-2">
+                                <i class="fa-solid fa-rotate-right"></i> Ulangi Evaluasi
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT HALF: Assemblr Edu 3D/AR Simulation Frame (50%) -->
+            <div class="w-1/2 flex flex-col bg-slate-950/60 relative">
+                
+                <!-- Simulation Frame Bar Controls -->
+                <div class="h-12 border-b border-slate-800/80 px-4 flex items-center justify-between bg-slate-900/40 shrink-0">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                        <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                        <span class="text-[11px] font-bold text-slate-400 ml-2 uppercase tracking-wider flex items-center gap-1">
+                            <i class="fa-solid fa-cube text-amber-500"></i> AR/3D Simulation Studio
+                        </span>
+                    </div>
+
+                    <!-- Mini status indicator -->
+                    <div class="flex items-center space-x-1.5 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-[9px] font-semibold text-slate-300">Assemblr Edu Player Ready</span>
+                    </div>
+                </div>
+
+                <!-- Live Embedding Interface & Custom View Container -->
+                <div class="flex-1 p-6 flex flex-col justify-between items-center relative overflow-hidden">
+                    
+                    <!-- Dynamic iframe wrapper with high-fidelity aesthetics -->
+                    <div class="w-full h-full bg-slate-950/80 rounded-2xl border border-slate-800 flex flex-col items-center justify-center relative overflow-hidden group">
+                        
+                        <!-- Real Dynamic Iframe Element -->
+                        <iframe id="assemblr-iframe" class="w-full h-full border-0 rounded-2xl hidden" 
+                                allow="xr-spatial-tracking; autoplay; fullscreen" 
+                                src=""></iframe>
+
+                        <!-- Default Creative Placeholder Screen -->
+                        <div id="assemblr-placeholder" class="text-center p-6 space-y-4 max-w-sm flex flex-col items-center justify-center h-full">
+                            <div class="w-16 h-16 bg-gradient-to-tr from-red-600/20 to-amber-500/20 border border-amber-500/30 text-amber-400 rounded-full flex items-center justify-center shadow-lg relative">
+                                <i class="fa-solid fa-cubes-stacked text-2xl animate-bounce"></i>
+                                <div class="absolute -inset-1 rounded-full border border-dashed border-amber-500/30 animate-spin" style="animation-duration: 12s"></div>
+                            </div>
+                            
+                            <div class="space-y-1">
+                                <h3 class="text-sm font-extrabold text-slate-200">Integrasi 3D Assemblr Edu</h3>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">
+                                    Mockup ini menyediakan area sematan khusus untuk player 3D/AR interaktif guna menggambarkan visualisasi Bhinneka Tunggal Ika dalam format imersif.
+                                </p>
+                            </div>
+
+                            <!-- Dynamic Input field for Users to paste live Assemblr links -->
+                            <div class="w-full space-y-2 pt-2 z-20">
+                                <label class="text-[10px] text-left block text-amber-400 font-bold uppercase tracking-wider">Coba Pasang Link Assemblr Edu Anda:</label>
+                                <div class="flex gap-1.5">
+                                    <input type="text" id="assemblr-url-input" 
+                                           class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 placeholder-slate-600 flex-1 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500" 
+                                           placeholder="Contoh: https://assemblrworld.com/web/xxx">
+                                    <button onclick="loadAssemblrIframe()" 
+                                            class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-3 rounded-lg text-xs transition-all flex items-center gap-1 active:scale-95 shadow-md shadow-amber-500/20">
+                                        Muat <i class="fa-solid fa-play text-[10px]"></i>
+                                    </button>
+                                </div>
+                                <p class="text-[9px] text-left text-slate-500">
+                                    *Tempelkan URL Assemblr Edu Anda (atau gunakan default bawaan mockup kami dengan klik 'Muat').
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Mini guide overlay bottom -->
+                    <div class="absolute bottom-8 left-8 right-8 bg-slate-900/90 backdrop-blur px-4 py-2 rounded-xl border border-slate-800/80 flex justify-between items-center shadow-lg">
+                        <span class="text-[10px] text-slate-400 font-medium">Petunjuk simulasi 3D/AR:</span>
+                        <div class="flex gap-2">
+                            <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-arrows-to-eye"></i> Geser Putar
+                            </span>
+                            <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i> Cubit Zoom
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer / Credits Bar -->
+        <footer class="h-10 bg-slate-950/90 border-t border-slate-800/80 px-6 flex items-center justify-between text-[10px] text-slate-500 shrink-0 z-10">
+            <div>
+                © 2026 Media Pembelajaran Interaktif Pancasila - SMA Kelas XI
+            </div>
+            <div class="flex items-center space-x-3 font-semibold text-slate-400">
+                <span>Rasio Tampilan 16:9</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-700"></span>
+                <span>Interaktif & Responsif</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script Logic Block -->
+    <script>
+        // Tab switching controller
+        function switchTab(tabId) {
+            // Reset active styles on all tabs
+            document.getElementById('tab-tujuan').className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 text-slate-400 border border-transparent hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-300';
+            document.getElementById('tab-materi').className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 text-slate-400 border border-transparent hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-300';
+            document.getElementById('tab-evaluasi').className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 text-slate-400 border border-transparent hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-300';
+            
+            // Hide all contents
+            document.getElementById('content-tujuan').classList.add('hidden');
+            document.getElementById('content-materi').classList.add('hidden');
+            document.getElementById('content-evaluasi').classList.add('hidden');
+
+            // Set clicked tab as active
+            const activeTabButton = document.getElementById(`tab-${tabId}`);
+            activeTabButton.className = 'active-tab flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border border-transparent transition-all duration-300';
+
+            // Show selected tab content
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+        }
+
+        // 10 Curricularly-solid Multiple Choice Questions for Grade XI SMA - Bhinneka Tunggal Ika
+        const quizQuestions = [
+            {
+                question: "1. Siapakah tokoh pujangga Majapahit yang melahirkan frasa 'Bhinneka Tunggal Ika' di dalam kitab Kakawin Sutasoma?",
+                options: [
+                    "A. Mpu Prapanca",
+                    "B. Mpu Tantular",
+                    "C. Gajah Mada",
+                    "D. Hayam Wuruk",
+                    "E. Mpu Sendok"
+                ],
+                answer: 1 // Option B
+            },
+            {
+                question: "2. Nilai fundamental yang terkandung dalam semboyan Bhinneka Tunggal Ika dalam kehidupan bernegara adalah...",
+                options: [
+                    "A. Penyeragaman segala perbedaan daerah",
+                    "B. Dominasi budaya mayoritas atas minoritas",
+                    "C. Harmonisasi dalam bingkai keberagaman NKRI",
+                    "D. Kebebasan mutlak setiap individu tanpa batas",
+                    "E. Pembagian kedaulatan berdasarkan suku bangsa"
+                ],
+                answer: 2 // Option C
+            },
+            {
+                question: "3. Salah satu tantangan integrasi sosial di era keterbukaan informasi digital saat ini adalah...",
+                options: [
+                    "A. Sulitnya akses transportasi ke daerah pedalaman",
+                    "B. Tingginya kesadaran ekologis generasi muda",
+                    "C. Maraknya hoaks bernuansa SARA yang memicu konflik",
+                    "D. Menguatnya rasa nasionalisme di kalangan pelajar",
+                    "E. Bertambahnya jumlah penduduk perkotaan"
+                ],
+                answer: 2 // Option C
+            },
+            {
+                question: "4. Tindakan preventif untuk menanggulangi prasangka (stereotip) antarsuku bangsa di sekolah adalah...",
+                options: [
+                    "A. Melarang penggunaan bahasa daerah sama sekali",
+                    "B. Melakukan asimilasi paksa kebudayaan daerah",
+                    "C. Mengadakan festival budaya nusantara berkala",
+                    "D. Memisah kelas belajar berdasarkan latar belakang",
+                    "E. Menghapus kurikulum pendidikan bela negara"
+                ],
+                answer: 2 // Option C
+            },
+            {
+                question: "5. Siapa tokoh perancang Lambang Negara Garuda Pancasila yang meletakkan pita Bhinneka Tunggal Ika dalam cengkeraman kakinya?",
+                options: [
+                    "A. Ir. Soekarno",
+                    "B. Drs. Mohammad Hatta",
+                    "C. Sultan Hamid II dari Pontianak",
+                    "D. Muhammad Yamin",
+                    "E. Soepomo"
+                ],
+                answer: 2 // Option C
+            },
+            {
+                question: "6. Bentuk toleransi aktif yang paling tepat dalam pergaulan di masyarakat majemuk adalah...",
+                options: [
+                    "A. Membantu tetangga ibadah agama lain tanpa peduli norma",
+                    "B. Mengikuti upacara ritual keagamaan keyakinan orang lain",
+                    "C. Menghormati hari raya keagamaan lain dengan tulus dan menjaga kondusivitas",
+                    "D. Menolak bertegur sapa dengan tetangga berbeda suku",
+                    "E. Mengabaikan segala bentuk diskriminasi di sekitar kita"
+                ],
+                answer: 2 // Option C
+            },
+            {
+                question: "7. Sikap etnosentrisme berlebihan berisiko tinggi merusak persatuan karena memiliki pandangan bahwa...",
+                options: [
+                    "A. Kebudayaan luar selalu lebih hebat dari dalam negeri",
+                    "B. Semua kebudayaan di dunia memiliki derajat yang setara",
+                    "C. Kebudayaannya sendiri paling unggul dibanding budaya lain",
+                    "D. Perbedaan kultural adalah aset wisata yang bernilai ekonomi",
+                    "E. Gotong royong merupakan peninggalan masa lampau"
+                ],
+                answer: 2 // Option C
+            },
+            {
+                question: "8. Dalam konteks Pancasila, keragaman budaya Indonesia dipandang sebagai...",
+                options: [
+                    "A. Beban APBN karena biaya perawatan pelestarian mahal",
+                    "B. Kekayaan khazanah bangsa sekaligus tali pengikat persatuan",
+                    "C. Hambatan akselerasi industrialisasi modernisasi",
+                    "D. Penyebab utama lambatnya pembangunan infrastruktur",
+                    "E. Sumber kericuhan politik nasional jangka panjang"
+                ],
+                answer: 1 // Option B
+            },
+            {
+                question: "9. Landasan hukum utama negara Indonesia yang menegaskan kedudukan hukum Bhinneka Tunggal Ika sebagai semboyan resmi adalah...",
+                options: [
+                    "A. Pembukaan UUD NRI Tahun 1945 Alinea Pertama",
+                    "B. Ketetapan MPR RI No II/2001",
+                    "C. Pasal 36A UUD NRI Tahun 1945",
+                    "D. Piagam Jakarta tanggal 22 Juni 1945",
+                    "E. Keputusan Presiden RI tahun 1950"
+                ],
+                answer: 2 // Option C
+            },
+            {
+                question: "10. Pengamalan konsep toleransi kebhinekaan di lingkungan sekolah tercermin melalui tindakan...",
+                options: [
+                    "A. Membentuk geng belajar berdasarkan suku yang sama",
+                    "B. Memilih ketua OSIS hanya berdasarkan kesamaan keyakinan",
+                    "C. Berteman baik dengan siapa saja tanpa membedakan ras, suku, dan agama",
+                    "D. Menghindari kerja kelompok dengan murid berkebutuhan khusus",
+                    "E. Selalu menentang pendapat guru saat sesi tanya jawab"
+                ],
+                answer: 2 // Option C
+            }
+        ];
+
+        // Quiz State Management
+        let currentQuestionIdx = 0;
+        let userAnswers = Array(quizQuestions.length).fill(null);
+        let liveScoreVal = 0;
+
+        // Render current question
+        function renderQuizQuestion() {
+            const container = document.getElementById('quiz-question-container');
+            const questionData = quizQuestions[currentQuestionIdx];
+
+            // Progress bar and index
+            document.getElementById('current-q-index').innerText = currentQuestionIdx + 1;
+            const progressPercent = ((currentQuestionIdx + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progressPercent}%`;
+
+            // Question Text
+            document.getElementById('question-text').innerText = questionData.question;
+
+            // Generate options HTML
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            questionData.options.forEach((option, idx) => {
+                const isSelected = userAnswers[currentQuestionIdx] === idx;
+                let optionStyle = 'bg-slate-900/60 border-slate-800 hover:bg-slate-800/40 hover:border-slate-700 text-slate-300';
+                
+                if (isSelected) {
+                    optionStyle = 'bg-amber-500/10 border-amber-500 text-amber-200';
+                }
+
+                const button = document.createElement('button');
+                button.className = `w-full text-left p-3 rounded-xl border ${optionStyle} transition-all duration-200 text-xs font-medium flex justify-between items-center group active:scale-[0.99]`;
+                button.onclick = () => selectOption(idx);
+
+                button.innerHTML = `
+                    <span>${option}</span>
+                    <div class="w-4 h-4 rounded-full border-2 ${isSelected ? 'border-amber-500 bg-amber-500' : 'border-slate-700'} flex items-center justify-center shrink-0">
+                        ${isSelected ? '<i class="fa-solid fa-check text-[10px] text-slate-950 font-bold"></i>' : ''}
+                    </div>
+                `;
+                optionsContainer.appendChild(button);
+            });
+
+            // Handle Back Button Status
+            const prevBtn = document.getElementById('prev-question-btn');
+            if (currentQuestionIdx === 0) {
+                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                prevBtn.disabled = false;
+            }
+
+            // Handle Next/Submit Button Text
+            const nextBtn = document.getElementById('next-question-btn');
+            if (currentQuestionIdx === quizQuestions.length - 1) {
+                nextBtn.innerHTML = `Selesai <i class="fa-solid fa-flag-checkered"></i>`;
+                nextBtn.className = "px-4 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-bold transition-all flex items-center gap-1.5 hover:shadow-lg hover:shadow-emerald-900/40";
+            } else {
+                nextBtn.innerHTML = `Lanjut <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.className = "px-4 py-1.5 rounded-lg bg-gradient-to-r from-red-600 to-amber-600 text-white text-xs font-bold transition-all flex items-center gap-1.5 hover:shadow-lg hover:shadow-red-900/40";
+            }
+        }
+
+        // Handle option selection
+        function selectOption(idx) {
+            userAnswers[currentQuestionIdx] = idx;
+            calculateLiveScore();
+            renderQuizQuestion();
+        }
+
+        // Calculate live score (10 points each correct answer)
+        function calculateLiveScore() {
+            let tempScore = 0;
+            userAnswers.forEach((ans, index) => {
+                if (ans === quizQuestions[index].answer) {
+                    tempScore += 10;
+                }
+            });
+            liveScoreVal = tempScore;
+            document.getElementById('live-score').innerText = liveScoreVal;
+        }
+
+        // Navigate forward
+        function nextQuestion() {
+            if (userAnswers[currentQuestionIdx] === null) {
+                // Warning hint instead of heavy alert
+                alert("Harap pilih salah satu opsi jawaban sebelum melanjutkan.");
+                return;
+            }
+
+            if (currentQuestionIdx < quizQuestions.length - 1) {
+                currentQuestionIdx++;
+                renderQuizQuestion();
+            } else {
+                showFinalResults();
+            }
+        }
+
+        // Navigate backward
+        function prevQuestion() {
+            if (currentQuestionIdx > 0) {
+                currentQuestionIdx--;
+                renderQuizQuestion();
+            }
+        }
+
+        // Display results view
+        function showFinalResults() {
+            document.getElementById('quiz-question-container').classList.add('hidden');
+            document.getElementById('prev-question-btn').classList.add('hidden');
+            document.getElementById('next-question-btn').classList.add('hidden');
+            
+            // Calculate correct answers count
+            let correctCount = 0;
+            userAnswers.forEach((ans, index) => {
+                if (ans === quizQuestions[index].answer) {
+                    correctCount++;
+                }
+            });
+
+            // Display values
+            document.getElementById('final-score').innerText = liveScoreVal;
+            document.getElementById('final-correct').innerText = `${correctCount} / 10`;
+            
+            // Reveal result div
+            document.getElementById('quiz-result-view').classList.remove('hidden');
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestionIdx = 0;
+            userAnswers = Array(quizQuestions.length).fill(null);
+            liveScoreVal = 0;
+            document.getElementById('live-score').innerText = 0;
+
+            document.getElementById('quiz-result-view').classList.add('hidden');
+            document.getElementById('quiz-question-container').classList.remove('hidden');
+            document.getElementById('prev-question-btn').classList.remove('hidden');
+            document.getElementById('next-question-btn').classList.remove('hidden');
+
+            renderQuizQuestion();
+        }
+
+        // Handler to dynamically load external Assemblr Edu URL or Iframe content
+        function loadAssemblrIframe() {
+            const inputVal = document.getElementById('assemblr-url-input').value.trim();
+            const iframe = document.getElementById('assemblr-iframe');
+            const placeholder = document.getElementById('assemblr-placeholder');
+
+            // Set fallback elegant URL representing an interactive 3D earth, classroom or museum
+            const targetURL = inputVal !== "" ? inputVal : "https://assemblrworld.com/viewer/index.html?sceneId=6716a575456f505314050e68"; // Fallback beautiful historical 3D view on Assemblr
+
+            if (targetURL) {
+                iframe.src = targetURL;
+                iframe.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            }
+        }
+
+        // Initialize state on window load
+        window.onload = function () {
+            renderQuizQuestion();
+        };
+    </script>
+</body>
+</html>
