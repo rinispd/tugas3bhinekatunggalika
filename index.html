@@ -68,7 +68,7 @@
                     <h1 class="text-sm md:text-base font-extrabold tracking-wide uppercase bg-gradient-to-r from-red-400 via-amber-200 to-white bg-clip-text text-transparent">
                         Bhinneka Tunggal Ika
                     </h1>
-                    <p class="text-[10px] md:text-xs text-slate-400 font-semibold">Fase F / Kelas XI SMA - Pendidikan Pancasila</p>
+                    <p class="text-[10px] md:text-xs text-slate-400 font-semibold">Fase E / Kelas XI SMA - Pendidikan Pancasila</p>
                 </div>
             </div>
             
@@ -114,7 +114,7 @@
                         <div class="bg-gradient-to-r from-slate-800/80 to-slate-900/80 p-5 rounded-2xl border border-slate-700/40 shadow-sm relative overflow-hidden">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
                             <h3 class="text-base font-extrabold text-red-400 mb-3 flex items-center gap-2">
-                                <i class="fa-solid fa-star-of-life"></i> Tujuan Pembelajaran (TP)
+                                <i class="fa-solid fa-star-of-life"></i> Tujuan Pembelajaran (TP) - Fase E
                             </h3>
                             <ul class="space-y-3 text-xs md:text-sm text-slate-300 font-medium">
                                 <li class="flex items-start gap-2.5">
@@ -132,7 +132,7 @@
                             </ul>
                         </div>
 
-                        <!-- Special Sultan Hamid II Tribute Panel (Adds contextual elegance) -->
+                        <!-- Special Sultan Hamid II Tribute Panel -->
                         <div class="bg-gradient-to-r from-amber-950/30 to-slate-900/80 p-5 rounded-2xl border border-amber-500/20 shadow-sm relative overflow-hidden">
                             <div class="absolute -bottom-5 -right-5 w-24 h-24 bg-amber-500/10 rounded-full blur-xl"></div>
                             <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-2">
@@ -276,72 +276,50 @@
                         <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
                         <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
                         <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
-                        <span class="text-[11px] font-bold text-slate-400 ml-2 uppercase tracking-wider flex items-center gap-1">
-                            <i class="fa-solid fa-cube text-amber-500"></i> AR/3D Simulation Studio
+                        <span class="text-[11px] font-bold text-slate-400 ml-2 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-cube text-amber-500 animate-pulse"></i> Simulasi Interaktif 3D/AR
                         </span>
                     </div>
 
                     <!-- Mini status indicator -->
                     <div class="flex items-center space-x-1.5 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span class="text-[9px] font-semibold text-slate-300">Assemblr Edu Player Ready</span>
+                        <span class="text-[9px] font-semibold text-slate-300">Assemblr Player Active</span>
                     </div>
                 </div>
 
                 <!-- Live Embedding Interface & Custom View Container -->
-                <div class="flex-1 p-6 flex flex-col justify-between items-center relative overflow-hidden">
+                <div class="flex-1 p-4 flex flex-col justify-between items-center relative overflow-hidden">
                     
                     <!-- Dynamic iframe wrapper with high-fidelity aesthetics -->
-                    <div class="w-full h-full bg-slate-950/80 rounded-2xl border border-slate-800 flex flex-col items-center justify-center relative overflow-hidden group">
+                    <div class="w-full h-full bg-slate-950 rounded-2xl border border-slate-800/80 flex flex-col items-center justify-center relative overflow-hidden group">
                         
-                        <!-- Real Dynamic Iframe Element -->
-                        <iframe id="assemblr-iframe" class="w-full h-full border-0 rounded-2xl hidden" 
-                                allow="xr-spatial-tracking; autoplay; fullscreen" 
-                                src=""></iframe>
-
-                        <!-- Default Creative Placeholder Screen -->
-                        <div id="assemblr-placeholder" class="text-center p-6 space-y-4 max-w-sm flex flex-col items-center justify-center h-full">
-                            <div class="w-16 h-16 bg-gradient-to-tr from-red-600/20 to-amber-500/20 border border-amber-500/30 text-amber-400 rounded-full flex items-center justify-center shadow-lg relative">
-                                <i class="fa-solid fa-cubes-stacked text-2xl animate-bounce"></i>
-                                <div class="absolute -inset-1 rounded-full border border-dashed border-amber-500/30 animate-spin" style="animation-duration: 12s"></div>
-                            </div>
-                            
-                            <div class="space-y-1">
-                                <h3 class="text-sm font-extrabold text-slate-200">Integrasi 3D Assemblr Edu</h3>
-                                <p class="text-[11px] text-slate-400 leading-relaxed">
-                                    Mockup ini menyediakan area sematan khusus untuk player 3D/AR interaktif guna menggambarkan visualisasi Bhinneka Tunggal Ika dalam format imersif.
-                                </p>
-                            </div>
-
-                            <!-- Dynamic Input field for Users to paste live Assemblr links -->
-                            <div class="w-full space-y-2 pt-2 z-20">
-                                <label class="text-[10px] text-left block text-amber-400 font-bold uppercase tracking-wider">Coba Pasang Link Assemblr Edu Anda:</label>
-                                <div class="flex gap-1.5">
-                                    <input type="text" id="assemblr-url-input" 
-                                           class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 placeholder-slate-600 flex-1 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500" 
-                                           placeholder="Contoh: https://assemblrworld.com/web/xxx">
-                                    <button onclick="loadAssemblrIframe()" 
-                                            class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-3 rounded-lg text-xs transition-all flex items-center gap-1 active:scale-95 shadow-md shadow-amber-500/20">
-                                        Muat <i class="fa-solid fa-play text-[10px]"></i>
-                                    </button>
-                                </div>
-                                <p class="text-[9px] text-left text-slate-500">
-                                    *Tempelkan URL Assemblr Edu Anda (atau gunakan default bawaan mockup kami dengan klik 'Muat').
-                                </p>
-                            </div>
+                        <!-- Real-time Loading Spinner -->
+                        <div id="iframe-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/90 z-20 transition-opacity duration-500">
+                            <div class="w-10 h-10 border-4 border-t-amber-500 border-r-transparent border-b-amber-500 border-l-transparent rounded-full animate-spin mb-3"></div>
+                            <p class="text-xs text-slate-400 font-semibold tracking-wider uppercase">Memuat Model 3D...</p>
+                            <p class="text-[10px] text-slate-600 mt-1">Harap tunggu beberapa saat</p>
                         </div>
+
+                        <!-- Real Embedded Iframe from Assemblr World -->
+                        <iframe id="assemblr-iframe" class="w-full h-full border-0 rounded-2xl" 
+                                allow="camera; microphone; gyroscope; accelerometer; magnetometer; xr-spatial-tracking; fullscreen" 
+                                allowfullscreen
+                                src="https://viewer.assemblrworld.com/Embed/-Keuydowfe8XPYEoX5RT"
+                                onload="hideIframeLoader()">
+                        </iframe>
 
                     </div>
 
                     <!-- Mini guide overlay bottom -->
-                    <div class="absolute bottom-8 left-8 right-8 bg-slate-900/90 backdrop-blur px-4 py-2 rounded-xl border border-slate-800/80 flex justify-between items-center shadow-lg">
-                        <span class="text-[10px] text-slate-400 font-medium">Petunjuk simulasi 3D/AR:</span>
+                    <div class="w-full mt-3 bg-slate-900/90 backdrop-blur px-4 py-2.5 rounded-xl border border-slate-800/80 flex justify-between items-center shadow-lg shrink-0">
+                        <span class="text-[10px] text-slate-400 font-medium">Navigasi Simulasi:</span>
                         <div class="flex gap-2">
-                            <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-arrows-to-eye"></i> Geser Putar
+                            <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-1 rounded-md border border-slate-700/80 flex items-center gap-1">
+                                <i class="fa-solid fa-arrows-to-eye text-amber-400"></i> Seret untuk Memutar
                             </span>
-                            <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-magnifying-glass-plus"></i> Cubit Zoom
+                            <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-1 rounded-md border border-slate-700/80 flex items-center gap-1">
+                                <i class="fa-solid fa-magnifying-glass-plus text-amber-400"></i> Cubit/Scroll Zoom
                             </span>
                         </div>
                     </div>
@@ -354,7 +332,7 @@
         <!-- Footer / Credits Bar -->
         <footer class="h-10 bg-slate-950/90 border-t border-slate-800/80 px-6 flex items-center justify-between text-[10px] text-slate-500 shrink-0 z-10">
             <div>
-                © 2026 Media Pembelajaran Interaktif Pancasila - SMA Kelas XI
+                © 2026 Media Pembelajaran Interaktif Pancasila - SMA Kelas XI (Fase E)
             </div>
             <div class="flex items-center space-x-3 font-semibold text-slate-400">
                 <span>Rasio Tampilan 16:9</span>
@@ -387,7 +365,15 @@
             document.getElementById(`content-${tabId}`).classList.remove('hidden');
         }
 
-        // 10 Curricularly-solid Multiple Choice Questions for Grade XI SMA - Bhinneka Tunggal Ika
+        // Hide loader when Iframe is completely ready
+        function hideIframeLoader() {
+            const loader = document.getElementById('iframe-loader');
+            if (loader) {
+                loader.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // 10 Curricularly-solid Multiple Choice Questions for Grade XI SMA - Bhinneka Tunggal Ika (Fase E)
         const quizQuestions = [
             {
                 question: "1. Siapakah tokoh pujangga Majapahit yang melahirkan frasa 'Bhinneka Tunggal Ika' di dalam kitab Kakawin Sutasoma?",
@@ -587,8 +573,12 @@
         // Navigate forward
         function nextQuestion() {
             if (userAnswers[currentQuestionIdx] === null) {
-                // Warning hint instead of heavy alert
-                alert("Harap pilih salah satu opsi jawaban sebelum melanjutkan.");
+                // Warning indicator using customized dynamic badge instead of alert
+                const questionContainer = document.getElementById('quiz-question-container');
+                questionContainer.classList.add('ring-2', 'ring-red-500/50');
+                setTimeout(() => {
+                    questionContainer.classList.remove('ring-2', 'ring-red-500/50');
+                }, 800);
                 return;
             }
 
@@ -643,22 +633,6 @@
             document.getElementById('next-question-btn').classList.remove('hidden');
 
             renderQuizQuestion();
-        }
-
-        // Handler to dynamically load external Assemblr Edu URL or Iframe content
-        function loadAssemblrIframe() {
-            const inputVal = document.getElementById('assemblr-url-input').value.trim();
-            const iframe = document.getElementById('assemblr-iframe');
-            const placeholder = document.getElementById('assemblr-placeholder');
-
-            // Set fallback elegant URL representing an interactive 3D earth, classroom or museum
-            const targetURL = inputVal !== "" ? inputVal : "https://assemblrworld.com/viewer/index.html?sceneId=6716a575456f505314050e68"; // Fallback beautiful historical 3D view on Assemblr
-
-            if (targetURL) {
-                iframe.src = targetURL;
-                iframe.classList.remove('hidden');
-                placeholder.classList.add('hidden');
-            }
         }
 
         // Initialize state on window load
